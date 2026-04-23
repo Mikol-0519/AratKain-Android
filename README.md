@@ -14,7 +14,7 @@ AratKain is an Android application that connects to the **Supabase** backend to 
 
 | Name | Role |
 |---|---|
-| Mikel Josh A. Niccor | Mobile Developer |
+| Mikel Josh A. Nicer | Mobile Developer |
 
 ---
 
