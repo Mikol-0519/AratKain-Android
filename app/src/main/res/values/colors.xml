@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AratKain Web Palette (exact match) -->
+    <color name="espresso">#2C1A0E</color>
+    <color name="cream">#F7F2EA</color>
+    <color name="latte">#C8A97E</color>
+    <color name="steam">#E8DDD0</color>
+    <color name="accent">#B85C38</color>
+    <color name="muted">#8A7060</color>
+    <color name="error">#C0392B</color>
+    <color name="error_bg">#FEF0EE</color>
+    <color name="error_border">#F5C6BC</color>
+    <color name="success">#27AE60</color>
+    <color name="success_bg">#EDFAF3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="espresso_dark">#3d2510</color>
+    <color name="latte_transparent">#24C8A97E</color>
+    <color name="placeholder">#C4B5A8</color>
+</resources>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Matches web .home-container (sidebar + map area) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <!-- ── SIDEBAR (matches web .sidebar) ── -->
+    <LinearLayout
+        android:layout_width="64dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/espresso"
+        android:paddingVertical="16dp"
+        android:gravity="center_horizontal"
+        android:elevation="8dp">
+
+        <!-- Logo AK + dot -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AK"
+                android:textSize="14sp"
+                android:textColor="@color/cream"
+                android:fontFamily="serif"
+                android:textStyle="bold" />
+
+            <!-- Dot -->
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:background="@color/accent"
+                android:layout_marginTop="3dp" />
+        </LinearLayout>
+
+        <View android:layout_width="32dp" android:layout_height="1dp"
+            android:background="#26C8A97E" android:layout_marginBottom="12dp" />
+
+        <!-- Nav buttons matching web .nav-btn -->
+        <!-- Food/Explore nav -->
+        <LinearLayout
+            android:id="@+id/btnNavFood"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:background="@drawable/selector_nav_btn"
+            android:layout_marginBottom="4dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🍽" android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- Saved nav -->
+        <LinearLayout
+            android:id="@+id/btnNavSaved"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:background="@drawable/selector_nav_btn"
+            android:layout_marginBottom="4dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🔖" android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- Profile nav -->
+        <LinearLayout
+            android:id="@+id/btnNavProfile"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:background="@drawable/selector_nav_btn">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="👤" android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- Spacer -->
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
+
+        <!-- Logout button at bottom matching web .logout-btn -->
+        <LinearLayout
+            android:id="@+id/btnLogout"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/bg_logout_btn"
+            android:layout_marginBottom="8dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="↪" android:textSize="16sp" android:textColor="@color/accent" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="OUT" android:textSize="7sp" android:textColor="@color/accent"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- ── MAIN CONTENT ── -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/cream">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Error -->
+            <LinearLayout
+                android:id="@+id/layoutError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_error_banner"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tvError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/error"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Progress -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                android:indeterminateTint="@color/accent"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Welcome card matching web espresso card -->
+            <LinearLayout
+                android:id="@+id/cardWelcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_dashboard_card"
+                android:padding="20dp"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="20dp">
+
+                <!-- Avatar circle with initials -->
+                <FrameLayout
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginEnd="16dp">
+
+                    <TextView
+                        android:id="@+id/tvInitials"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textColor="@color/latte"
+                        android:textStyle="bold"
+                        android:background="@drawable/circle_avatar" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivAvatar"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/latte"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- matches web tvWelcome -->
+                    <TextView
+                        android:id="@+id/tvWelcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Welcome back!"
+                        android:textColor="@color/latte"
+                        android:textSize="11sp" />
+
+                    <!-- matches web tvFullname -->
+                    <TextView
+                        android:id="@+id/tvFullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cream"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:fontFamily="serif" />
+
+                    <!-- matches web tvUsername -->
+                    <TextView
+                        android:id="@+id/tvUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#80C8A97E"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Info card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="20dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Account Info" android:textColor="@color/espresso"
+                    android:textSize="15sp" android:textStyle="bold" android:fontFamily="serif"
+                    android:layout_marginBottom="12dp" />
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:layout_marginBottom="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Email  " android:textColor="@color/muted" android:textSize="13sp" />
+                    <TextView android:id="@+id/tvEmail" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="@color/espresso"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="@color/steam" android:layout_marginVertical="12dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewProfile" style="@style/Widget.AratKain.Button"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="View Profile" />
+            </LinearLayout>
+
+            <!-- Nearby chip matching web .nearby-chip -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_dashboard_card"
+                android:padding="12dp"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="end">
+
+                <!-- Glowing dot -->
+                <View android:layout_width="7dp" android:layout_height="7dp"
+                    android:background="@color/accent" android:layout_marginEnd="10dp" />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Nearby " android:textColor="@color/cream" android:textSize="12sp" />
+
+                <TextView android:id="@+id/tvNearbyCount"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="6" android:textColor="@color/latte"
+                    android:textSize="18sp" android:textStyle="bold" android:fontFamily="serif" />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text=" spots" android:textColor="@color/cream" android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

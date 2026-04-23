@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AratKain" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/espresso</item>
+        <item name="colorPrimaryVariant">@color/espresso_dark</item>
+        <item name="colorOnPrimary">@color/cream</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/cream</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="android:statusBarColor">@color/espresso</item>
+        <item name="android:navigationBarColor">@color/espresso</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Theme.AratKain.Splash" parent="Theme.AratKain">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!-- Matches web .btn-primary -->
+    <style name="Widget.AratKain.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/espresso</item>
+        <item name="android:textColor">@color/cream</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="rippleColor">@color/espresso_dark</item>
+    </style>
+
+    <!-- Matches web secondary/outline button -->
+    <style name="Widget.AratKain.Button.Outline" parent="Widget.AratKain.Button">
+        <item name="backgroundTint">@color/steam</item>
+        <item name="android:textColor">@color/espresso</item>
+    </style>
+
+    <!-- Matches web TextInputLayout style -->
+    <style name="Widget.AratKain.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/steam</item>
+        <item name="boxStrokeWidth">1.5dp</item>
+        <item name="hintTextColor">@color/muted</item>
+        <item name="hintTextAppearance">@style/TextAppearance.AratKain.Hint</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="errorTextColor">@color/error</item>
+        <item name="errorIconDrawable">@null</item>
+    </style>
+
+    <!-- Matches web .form-label (uppercase, small, muted) -->
+    <style name="TextAppearance.AratKain.Hint" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textColor">@color/muted</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Matches web .form-eyebrow -->
+    <style name="TextAppearance.AratKain.Eyebrow">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:letterSpacing">0.22</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Matches web .form-title (Playfair-like serif) -->
+    <style name="TextAppearance.AratKain.Title">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/espresso</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <!-- Matches web .form-subtitle -->
+    <style name="TextAppearance.AratKain.Subtitle">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/muted</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <!-- Base style to prevent linking errors if specific ones are missing -->
+    <style name="TextAppearance.AratKain" parent="TextAppearance.MaterialComponents.Body1" />
+
+</resources>

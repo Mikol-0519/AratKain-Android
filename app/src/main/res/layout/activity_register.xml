@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/espresso"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:paddingHorizontal="28dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JOIN ARATKAIN"
+                android:textSize="10sp"
+                android:textColor="@color/accent"
+                android:letterSpacing="0.22"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create New Account"
+                android:textSize="28sp"
+                android:textColor="@color/cream"
+                android:fontFamily="serif"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start your food discovery journey"
+                android:textSize="13sp"
+                android:textColor="@color/muted"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Form -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <!-- Form content (hidden on success) -->
+            <LinearLayout
+                android:id="@+id/layoutForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Error banner -->
+                <LinearLayout
+                    android:id="@+id/layoutError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_error_banner"
+                    android:padding="14dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="gone">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="⚠  " android:textColor="@color/error" android:textSize="13sp" />
+                    <TextView android:id="@+id/tvError" android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:textColor="@color/error" android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Email -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="EMAIL" android:textSize="10sp" android:textColor="@color/muted"
+                    android:letterSpacing="0.12" android:textAllCaps="true" android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilEmail" style="@style/Widget.AratKain.TextInput"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:hint="you@example.com"
+                        android:textColorHint="@color/placeholder"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Username -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="USERNAME" android:textSize="10sp" android:textColor="@color/muted"
+                    android:letterSpacing="0.12" android:textAllCaps="true" android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUsername" style="@style/Widget.AratKain.TextInput"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUsername" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:hint="e.g. foodlover_ph"
+                        android:textColorHint="@color/placeholder" android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Full Name -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="FULL NAME" android:textSize="10sp" android:textColor="@color/muted"
+                    android:letterSpacing="0.12" android:textAllCaps="true" android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilFullname" style="@style/Widget.AratKain.TextInput"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFullname" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:hint="Your full name"
+                        android:textColorHint="@color/placeholder"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="PASSWORD" android:textSize="10sp" android:textColor="@color/muted"
+                    android:letterSpacing="0.12" android:textAllCaps="true" android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword" style="@style/Widget.AratKain.TextInput"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true" app:passwordToggleTint="@color/muted"
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:hint="Min. 6 characters"
+                        android:textColorHint="@color/placeholder"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Confirm Password -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="CONFIRM PASSWORD" android:textSize="10sp" android:textColor="@color/muted"
+                    android:letterSpacing="0.12" android:textAllCaps="true" android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilConfirmPassword" style="@style/Widget.AratKain.TextInput"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true" app:passwordToggleTint="@color/muted"
+                    android:layout_marginBottom="32dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etConfirmPassword" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:hint="Re-enter password"
+                        android:textColorHint="@color/placeholder"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ProgressBar android:id="@+id/progressBar"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" android:visibility="gone"
+                    android:indeterminateTint="@color/accent" android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRegister" style="@style/Widget.AratKain.Button"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="Create Account" android:layout_marginBottom="28dp" />
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:layout_gravity="center_horizontal">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Already have an account?  "
+                        android:textColor="@color/muted" android:textSize="14sp" />
+                    <TextView android:id="@+id/tvLogin" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="Log In"
+                        android:textColor="@color/accent" android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Success screen -->
+            <LinearLayout
+                android:id="@+id/layoutSuccess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:paddingTop="32dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="✅" android:textSize="64sp"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Welcome to AratKain!"
+                    android:textSize="26sp" android:textColor="@color/espresso"
+                    android:fontFamily="serif" android:textStyle="bold"
+                    android:gravity="center" android:layout_marginBottom="8dp" />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Account created successfully"
+                    android:textSize="14sp" android:textColor="@color/muted"
+                    android:gravity="center" android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/tvSuccessUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/accent"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="32dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoToDashboard"
+                    style="@style/Widget.AratKain.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Go to Dashboard →" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

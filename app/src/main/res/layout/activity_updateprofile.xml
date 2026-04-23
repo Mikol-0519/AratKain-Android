@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    android:fillViewport="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="24dp">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="PERSONAL INFORMATION"
+            style="@style/TextAppearance.AratKain.Eyebrow" android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            style="@style/TextAppearance.AratKain.Title" android:layout_marginBottom="6dp" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Update your username or full name"
+            style="@style/TextAppearance.AratKain.Subtitle" android:layout_marginBottom="28dp" />
+
+        <!-- Success Banner -->
+        <LinearLayout android:id="@+id/layoutSuccess"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:background="@drawable/bg_success_banner"
+            android:padding="12dp" android:gravity="center_vertical"
+            android:layout_marginBottom="16dp" android:visibility="gone">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="✓ " android:textColor="@color/success" android:textSize="13sp" />
+            <TextView android:id="@+id/tvSuccess" android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1"
+                android:textColor="@color/success" android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Error Banner -->
+        <LinearLayout android:id="@+id/layoutError"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:background="@drawable/bg_error_banner"
+            android:padding="12dp" android:gravity="center_vertical"
+            android:layout_marginBottom="16dp" android:visibility="gone">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="⚠ " android:textColor="@color/error" android:textSize="13sp" />
+            <TextView android:id="@+id/tvError" android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1"
+                android:textColor="@color/error" android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Username + Fullname side by side on tablet, stacked on phone -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="USERNAME" style="@style/TextAppearance.AratKain.Hint"
+            android:layout_marginBottom="6dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUsername" style="@style/Widget.AratKain.TextInput"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsername" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="FULL NAME" style="@style/TextAppearance.AratKain.Hint"
+            android:layout_marginBottom="6dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFullname" style="@style/Widget.AratKain.TextInput"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFullname" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email (disabled) -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="EMAIL" style="@style/TextAppearance.AratKain.Hint"
+            android:layout_marginBottom="6dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail" style="@style/Widget.AratKain.TextInput"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:inputType="textEmailAddress"
+                android:enabled="false" android:alpha="0.5" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Email cannot be changed"
+            android:textSize="11sp" android:textColor="@color/muted"
+            android:layout_marginBottom="24dp" />
+
+        <ProgressBar android:id="@+id/progressBar"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" android:visibility="gone"
+            android:indeterminateTint="@color/accent" android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave" style="@style/Widget.AratKain.Button"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="💾   Save Changes" />
+
+    </LinearLayout>
+</ScrollView>

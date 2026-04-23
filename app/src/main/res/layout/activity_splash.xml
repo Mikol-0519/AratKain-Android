@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/espresso">
+
+    <!-- Logo -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arat"
+            android:textSize="56sp"
+            android:textColor="@color/cream"
+            android:fontFamily="serif"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kain"
+            android:textSize="56sp"
+            android:textColor="@color/latte"
+            android:fontFamily="serif"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Tagline -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discover · Explore · Savor"
+        android:textSize="13sp"
+        android:textColor="@color/muted"
+        android:letterSpacing="0.12"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="8dp" />
+
+    <!-- Accent dot -->
+    <View
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:background="@color/accent"
+        android:layout_marginTop="32dp" />
+
+    <!-- Loading spinner -->
+    <ProgressBar
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="24dp"
+        android:indeterminateTint="@color/accent" />
+
+    <!-- Bottom tagline -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find the best cafes &amp; restaurants near you"
+        android:textSize="11sp"
+        android:textColor="@color/muted"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="48dp"
+        android:gravity="center" />
+
+</LinearLayout>
