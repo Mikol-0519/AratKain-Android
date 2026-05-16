@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Matches web .home-container (sidebar + map area) -->
+<!-- Dashboard: sidebar + full-screen map + bottom sheet -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <!-- ── SIDEBAR (matches web .sidebar) ── -->
+    <!-- ── SIDEBAR (unchanged) ─────────────────────────────── -->
     <LinearLayout
         android:layout_width="64dp"
         android:layout_height="match_parent"
@@ -16,14 +16,12 @@
         android:gravity="center_horizontal"
         android:elevation="8dp">
 
-        <!-- Logo AK + dot -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:paddingBottom="16dp">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,8 +30,6 @@
                 android:textColor="@color/cream"
                 android:fontFamily="serif"
                 android:textStyle="bold" />
-
-            <!-- Dot -->
             <View
                 android:layout_width="5dp"
                 android:layout_height="5dp"
@@ -44,8 +40,6 @@
         <View android:layout_width="32dp" android:layout_height="1dp"
             android:background="#26C8A97E" android:layout_marginBottom="12dp" />
 
-        <!-- Nav buttons matching web .nav-btn -->
-        <!-- Food/Explore nav -->
         <LinearLayout
             android:id="@+id/btnNavFood"
             android:layout_width="44dp"
@@ -57,7 +51,6 @@
                 android:text="🍽" android:textSize="18sp" />
         </LinearLayout>
 
-        <!-- Saved nav -->
         <LinearLayout
             android:id="@+id/btnNavSaved"
             android:layout_width="44dp"
@@ -69,7 +62,6 @@
                 android:text="🔖" android:textSize="18sp" />
         </LinearLayout>
 
-        <!-- Profile nav -->
         <LinearLayout
             android:id="@+id/btnNavProfile"
             android:layout_width="44dp"
@@ -80,10 +72,8 @@
                 android:text="👤" android:textSize="18sp" />
         </LinearLayout>
 
-        <!-- Spacer -->
         <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
 
-        <!-- Logout button at bottom matching web .logout-btn -->
         <LinearLayout
             android:id="@+id/btnLogout"
             android:layout_width="44dp"
@@ -101,180 +91,242 @@
 
     </LinearLayout>
 
-    <!-- ── MAIN CONTENT ── -->
-    <ScrollView
+    <!-- ── MAIN CONTENT: Map + Overlays + Bottom Sheet ────────── -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/cream">
+        android:layout_weight="1">
 
+        <!-- Full-screen OSMDroid map -->
+        <org.osmdroid.views.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Error banner (floats on top of map) -->
         <LinearLayout
+            android:id="@+id/layoutError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <!-- Error -->
-            <LinearLayout
-                android:id="@+id/layoutError"
+            android:layout_gravity="top"
+            android:layout_marginTop="80dp"
+            android:layout_marginHorizontal="12dp"
+            android:background="@drawable/bg_error_banner"
+            android:padding="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/tvError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_error_banner"
-                android:padding="12dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:visibility="gone"
-                android:layout_marginBottom="16dp">
+                android:textColor="@color/error"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Loading indicator -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:indeterminateTint="@color/accent" />
+
+        <!-- ── Top overlay: compact welcome card ── -->
+        <LinearLayout
+            android:id="@+id/cardWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_dashboard_card"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:elevation="6dp">
+
+            <!-- Avatar -->
+            <FrameLayout
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="10dp">
+                <TextView
+                    android:id="@+id/tvInitials"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@color/latte"
+                    android:textStyle="bold"
+                    android:background="@drawable/circle_avatar" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/latte"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <!-- Name info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome back!"
+                    android:textColor="@color/latte"
+                    android:textSize="9sp" />
+                <TextView
+                    android:id="@+id/tvFullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/cream"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="serif" />
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#80C8A97E"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <!-- Profile icon button -->
+            <LinearLayout
+                android:id="@+id/btnViewProfile"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:gravity="center"
+                android:background="@drawable/selector_nav_btn">
 
                 <TextView
-                    android:id="@+id/tvError"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/error"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-            <!-- Progress -->
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:visibility="gone"
-                android:indeterminateTint="@color/accent"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Welcome card matching web espresso card -->
-            <LinearLayout
-                android:id="@+id/cardWelcome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_dashboard_card"
-                android:padding="20dp"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
-
-                <!-- Avatar circle with initials -->
-                <FrameLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginEnd="16dp">
-
-                    <TextView
-                        android:id="@+id/tvInitials"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:gravity="center"
-                        android:textSize="20sp"
-                        android:textColor="@color/latte"
-                        android:textStyle="bold"
-                        android:background="@drawable/circle_avatar" />
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/ivAvatar"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        app:civ_border_width="2dp"
-                        app:civ_border_color="@color/latte"
-                        android:visibility="gone" />
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <!-- matches web tvWelcome -->
-                    <TextView
-                        android:id="@+id/tvWelcome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Welcome back!"
-                        android:textColor="@color/latte"
-                        android:textSize="11sp" />
-
-                    <!-- matches web tvFullname -->
-                    <TextView
-                        android:id="@+id/tvFullname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/cream"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:fontFamily="serif" />
-
-                    <!-- matches web tvUsername -->
-                    <TextView
-                        android:id="@+id/tvUsername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#80C8A97E"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Info card -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
-                android:padding="20dp"
-                android:layout_marginBottom="16dp">
-
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Account Info" android:textColor="@color/espresso"
-                    android:textSize="15sp" android:textStyle="bold" android:fontFamily="serif"
-                    android:layout_marginBottom="12dp" />
-
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:orientation="horizontal" android:layout_marginBottom="8dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="Email  " android:textColor="@color/muted" android:textSize="13sp" />
-                    <TextView android:id="@+id/tvEmail" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:textColor="@color/espresso"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <View android:layout_width="match_parent" android:layout_height="1dp"
-                    android:background="@color/steam" android:layout_marginVertical="12dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnViewProfile" style="@style/Widget.AratKain.Button"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="View Profile" />
-            </LinearLayout>
-
-            <!-- Nearby chip matching web .nearby-chip -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_dashboard_card"
-                android:padding="12dp"
-                android:paddingHorizontal="16dp"
-                android:gravity="center_vertical"
-                android:layout_gravity="end">
-
-                <!-- Glowing dot -->
-                <View android:layout_width="7dp" android:layout_height="7dp"
-                    android:background="@color/accent" android:layout_marginEnd="10dp" />
-
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Nearby " android:textColor="@color/cream" android:textSize="12sp" />
-
-                <TextView android:id="@+id/tvNearbyCount"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="6" android:textColor="@color/latte"
-                    android:textSize="18sp" android:textStyle="bold" android:fontFamily="serif" />
-
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text=" spots" android:textColor="@color/cream" android:textSize="12sp" />
+                    android:text="⚙"
+                    android:textColor="@color/latte"
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+
+        <!-- Re-center FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabMyLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="104dp"
+            android:contentDescription="My Location"
+            app:backgroundTint="@color/espresso"
+            app:tint="@color/accent"
+            android:src="@android:drawable/ic_menu_compass"
+            app:elevation="6dp"
+            app:fabSize="mini" />
+
+        <!-- ── Bottom Sheet ── -->
+        <LinearLayout
+            android:id="@+id/bottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:behavior_peekHeight="80dp"
+            app:behavior_hideable="false">
+
+            <!-- Drag handle -->
+            <View
+                android:layout_width="36dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/steam"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="6dp" />
+
+            <!-- Nearby count + email row (peek content) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="10dp">
+
+                <!-- Glowing dot -->
+                <View
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:background="@color/accent"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nearby "
+                    android:textColor="@color/espresso"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvNearbyCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="—"
+                    android:textColor="@color/espresso"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="serif" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" spots"
+                    android:textColor="@color/espresso"
+                    android:textSize="12sp" />
+
+                <!-- Spacer -->
+                <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
+
+                <!-- Email (right-aligned, secondary info) -->
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/muted"
+                    android:textSize="11sp"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/steam" />
+
+            <!-- Nearby places list — only visible when sheet is expanded -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNearbyPlaces"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingVertical="8dp"
+                android:clipToPadding="false"
+                android:overScrollMode="ifContentScrolls" />
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

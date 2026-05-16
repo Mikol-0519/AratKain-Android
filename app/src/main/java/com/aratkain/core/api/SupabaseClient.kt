@@ -100,4 +100,6 @@ object SupabaseClient {
 
     val auth: SupabaseAuthApi = retrofit.create(SupabaseAuthApi::class.java)
     val db:   SupabaseDbApi   = retrofit.create(SupabaseDbApi::class.java)
+    // In your SupabaseClient.kt, alongside your existing `db`:
+    val storage: SupabaseStorageService = retrofit.create(SupabaseStorageService::class.java)
 }

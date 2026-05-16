@@ -50,8 +50,13 @@ class SessionManager(context: Context) {
         }
     }
 
+    // ── Added: persist photo URL independently of a full saveSession ──
+    fun savePhotoUrl(url: String) {
+        prefs.edit().putString(KEY_PHOTO, url).apply()
+    }
+
     fun getCurrentUser(): UserData? {
-        val token = getToken() ?: return null
+        val token  = getToken()  ?: return null
         val userId = getUserId() ?: return null
         return UserData(
             userId   = userId,

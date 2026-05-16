@@ -29,22 +29,13 @@ class ProfileActivity : AppCompatActivity(), ProfileContract.View {
 
         presenter = ProfilePresenter(this, SessionManager(this))
 
-        // Interaction 1: Edit Profile
-        binding.btnUpdateProfile.setOnClickListener {
-            presenter.onEditProfileClicked()
-        }
-
-        // Interaction 2: Change Password
-        binding.btnChangePassword.setOnClickListener {
-            presenter.onChangePasswordClicked()
-        }
-
-        // Interaction 3: Back (toolbar)
-        // handled by onSupportNavigateUp
+        binding.btnUpdateProfile.setOnClickListener  { presenter.onEditProfileClicked()    }
+        binding.btnChangePassword.setOnClickListener { presenter.onChangePasswordClicked() }
     }
 
     override fun onResume() {
         super.onResume()
+        // Re-load on resume so photo/name changes from UpdateProfileActivity are reflected
         presenter.onViewResumed()
     }
 
@@ -68,19 +59,11 @@ class ProfileActivity : AppCompatActivity(), ProfileContract.View {
         }
     }
 
-    override fun navigateToUpdateProfile()  {
-        startActivity(Intent(this, UpdateProfileActivity::class.java))
-    }
+    override fun navigateToUpdateProfile()  { startActivity(Intent(this, UpdateProfileActivity::class.java)) }
+    override fun navigateToChangePassword() { startActivity(Intent(this, ChangePasswordActivity::class.java)) }
+    override fun navigateBack()             { finish() }
 
-    override fun navigateToChangePassword() {
-        startActivity(Intent(this, ChangePasswordActivity::class.java))
-    }
-
-    override fun navigateBack() { finish() }
-
-    override fun onSupportNavigateUp(): Boolean {
-        presenter.onBackClicked(); return true
-    }
+    override fun onSupportNavigateUp(): Boolean { presenter.onBackClicked(); return true }
 
     override fun onDestroy() {
         super.onDestroy()
