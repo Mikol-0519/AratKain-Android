@@ -1,103 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/item_nearby_place.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Single row in the "Nearby Places" bottom-sheet RecyclerView.
+    Palette: espresso background, cream text, accent highlights.
+-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="10dp"
-    android:gravity="center_vertical"
-    android:background="?attr/selectableItemBackground">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="@color/espresso">
 
-    <!-- Type emoji badge -->
-    <TextView
-        android:id="@+id/tvTypeIcon"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:background="@drawable/bg_card"
-        android:layout_marginEnd="12dp" />
-
-    <!-- Name + type + address -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
 
+        <!-- ── Type icon ─────────────────────────────────────── -->
         <TextView
-            android:id="@+id/tvPlaceName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/espresso"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end" />
+            android:id="@+id/tvTypeIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:textSize="26sp"
+            android:background="@drawable/circle_avatar" />
 
+        <!-- ── Centre content block ──────────────────────────── -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="2dp">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp">
 
-            <TextView
-                android:id="@+id/tvPlaceType"
-                android:layout_width="wrap_content"
+            <!-- Row 1: Name + Open/Closed badge -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/accent"
-                android:textSize="11sp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tvPlaceName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/cream"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+
+                <!-- Open / Closed badge — visibility set in adapter -->
+                <TextView
+                    android:id="@+id/tvOpenStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- Row 2: Type + Distance -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="  •  "
-                android:textColor="@color/steam"
-                android:textSize="11sp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp">
 
+                <TextView
+                    android:id="@+id/tvPlaceType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/accent"
+                    android:textSize="12sp" />
+
+                <!-- Distance — visibility set in adapter -->
+                <TextView
+                    android:id="@+id/tvDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/latte"
+                    android:textSize="11sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- Row 3: Address -->
             <TextView
                 android:id="@+id/tvPlaceAddress"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/muted"
-                android:textSize="11sp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/latte"
+                android:textSize="12sp"
                 android:maxLines="1"
                 android:ellipsize="end" />
 
+            <!-- Row 4: Rating -->
+            <TextView
+                android:id="@+id/tvPlaceRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/accent"
+                android:textSize="12sp" />
+
         </LinearLayout>
 
-    </LinearLayout>
-
-    <!-- Rating badge -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginStart="8dp">
+        <!-- ── Bookmark button ────────────────────────────────── -->
         <TextView
-            android:id="@+id/tvPlaceRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/accent"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:id="@+id/btnItemBookmark"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:text="🔖"
+            android:textSize="18sp"
+            android:alpha="0.4"
+            android:background="@drawable/selector_nav_btn"
+            android:padding="4dp" />
+
     </LinearLayout>
 
-    <!-- Bookmark toggle — only addition to the original layout -->
-    <TextView
-        android:id="@+id/btnItemBookmark"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:text="🔖"
-        android:alpha="0.35"
-        android:layout_marginStart="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="4dp" />
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -5,11 +5,25 @@
     Colours follow the existing espresso / cream / accent palette.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/bg_card"
     android:paddingBottom="24dp">
+
+    <!-- ── Photo banner ──────────────────────────────────────────
+         Shown when the establishment has a photoUrl. Hidden (GONE)
+         when no photo exists — the emoji icon is shown instead.   -->
+    <ImageView
+        android:id="@+id/ivDetailPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/photo_of_establishment"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:background="@color/steam" />
 
     <!-- Drag handle -->
     <View
@@ -41,7 +55,7 @@
 
     </FrameLayout>
 
-    <!-- Type icon (large emoji) -->
+    <!-- Type emoji icon — hidden when a photo is loaded -->
     <TextView
         android:id="@+id/tvDetailTypeIcon"
         android:layout_width="64dp"
@@ -68,15 +82,32 @@
         android:maxLines="2"
         android:ellipsize="end" />
 
-    <!-- Type label (e.g. "☕ Café") -->
-    <TextView
-        android:id="@+id/tvDetailType"
+    <!-- Type label + Open/Closed badge side-by-side -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/accent"
-        android:textSize="13sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="4dp">
+
+        <TextView
+            android:id="@+id/tvDetailType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/accent"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvOpenStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
     <!-- Divider -->
     <View
@@ -120,7 +151,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingHorizontal="24dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:layout_width="20dp"
@@ -138,7 +169,35 @@
             android:textSize="13sp" />
     </LinearLayout>
 
-    <!-- Action row: Directions  +  Bookmark -->
+    <!-- Distance row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="24dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:text="🚶"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvDetailDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/latte"
+            android:textSize="13sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Action row: Directions + Bookmark
+         Gap replaced with layout_marginEnd / layout_marginStart
+         on each button — works on all API levels.               -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -146,12 +205,42 @@
         android:gravity="center"
         android:paddingHorizontal="24dp">
 
+        <!-- Directions button -->
+        <LinearLayout
+            android:id="@+id/btnDirections"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_card"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🗺️"
+                android:textSize="18sp"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Directions"
+                android:textColor="@color/cream"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
         <!-- Bookmark toggle button -->
         <LinearLayout
             android:id="@+id/btnBookmark"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
+            android:layout_marginStart="6dp"
             android:orientation="horizontal"
             android:gravity="center"
             android:background="@drawable/bg_card"

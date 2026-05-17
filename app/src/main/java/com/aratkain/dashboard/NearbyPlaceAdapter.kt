@@ -1,6 +1,8 @@
 package com.aratkain.dashboard
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aratkain.core.model.EstablishmentResponse
@@ -28,16 +30,6 @@ class NearbyPlaceAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(place: EstablishmentResponse) {
-            // ── Text fields ─────────────────────────────────────
-            binding.tvPlaceName.text = place.name
-
-            binding.tvPlaceType.text = place.type
-                ?.replaceFirstChar { it.uppercase() } ?: "Place"
-
-            binding.tvPlaceAddress.text = place.address ?: "No address available"
-
-            binding.tvPlaceRating.text = place.rating
-                ?.let { "★ ${"%.1f".format(it)}" } ?: ""
 
             // ── Type emoji ───────────────────────────────────────
             binding.tvTypeIcon.text = when (place.type?.lowercase()) {
@@ -45,6 +37,46 @@ class NearbyPlaceAdapter(
                 "bar"        -> "🍺"
                 "restaurant" -> "🍽"
                 else         -> "📍"
+            }
+
+            // ── Text fields ──────────────────────────────────────
+            binding.tvPlaceName.text    = place.name
+            binding.tvPlaceType.text    = place.type
+                ?.replaceFirstChar { it.uppercase() } ?: "Place"
+            binding.tvPlaceAddress.text = place.address ?: "No address available"
+            binding.tvPlaceRating.text  = place.rating
+                ?.let { "★ ${"%.1f".format(it)}" } ?: ""
+
+            // ── Distance ─────────────────────────────────────────
+            // Show "350 m" for under 1 km, "1.2 km" for anything further.
+            // Hidden when backend sends no distance (non-nearby endpoints).
+            val dist = place.distanceKm
+            if (dist != null) {
+                binding.tvDistance.visibility = View.VISIBLE
+                binding.tvDistance.text = if (dist < 1.0) {
+                    "${"%.0f".format(dist * 1000)} m away"
+                } else {
+                    "${"%.1f".format(dist)} km away"
+                }
+            } else {
+                binding.tvDistance.visibility = View.GONE
+            }
+
+            // ── Open / Closed badge ──────────────────────────────
+            // Green "Open" or red "Closed". Hidden when isOpen is null
+            // (establishment hasn't configured hours yet).
+            when (place.isOpen) {
+                true  -> {
+                    binding.tvOpenStatus.visibility = View.VISIBLE
+                    binding.tvOpenStatus.text       = "● Open"
+                    binding.tvOpenStatus.setTextColor(Color.parseColor("#4CAF50"))
+                }
+                false -> {
+                    binding.tvOpenStatus.visibility = View.VISIBLE
+                    binding.tvOpenStatus.text       = "● Closed"
+                    binding.tvOpenStatus.setTextColor(Color.parseColor("#F44336"))
+                }
+                null  -> binding.tvOpenStatus.visibility = View.GONE
             }
 
             // ── Bookmark icon state ──────────────────────────────
