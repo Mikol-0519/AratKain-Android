@@ -12,12 +12,21 @@ interface ProfileContract {
         fun navigateToUpdateProfile()
         fun navigateToChangePassword()
         fun navigateBack()
+        fun navigateToDashboard()
+        fun navigateToFavorites()
+        fun showLogoutConfirmation()
+        fun navigateToLogin()
+        fun showError(message: String)
     }
 
     interface Presenter {
         fun onViewResumed()
         fun onEditProfileClicked()
         fun onChangePasswordClicked()
+        fun onMapClicked()
+        fun onBookmarksClicked()
+        fun onLogoutClicked()
+        fun confirmLogout()
         fun onBackClicked()
         fun onDestroy()
     }

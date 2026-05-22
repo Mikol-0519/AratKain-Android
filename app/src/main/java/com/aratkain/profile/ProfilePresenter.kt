@@ -14,6 +14,24 @@ class ProfilePresenter(
 
     override fun onEditProfileClicked()      { view?.navigateToUpdateProfile()  }
     override fun onChangePasswordClicked()   { view?.navigateToChangePassword() }
+
+    override fun onMapClicked() {
+        view?.navigateToDashboard()
+    }
+
+    override fun onBookmarksClicked() {
+        view?.navigateToFavorites()
+    }
+
+    override fun onLogoutClicked() {
+        view?.showLogoutConfirmation()
+    }
+
+    override fun confirmLogout() {
+        session.logout()
+        view?.navigateToLogin()
+    }
+
     override fun onBackClicked()             { view?.navigateBack()             }
     override fun onDestroy()                 { view = null                      }
 }
