@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Place-detail bottom sheet
-    Shown when the user taps a map marker or a list item.
-    Colours follow the existing espresso / cream / accent palette.
--->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/bg_card"
+    android:background="@color/cream_bg"
     android:paddingBottom="24dp">
 
-    <!-- ── Photo banner ──────────────────────────────────────────
-         Shown when the establishment has a photoUrl. Hidden (GONE)
-         when no photo exists — the emoji icon is shown instead.   -->
+    <!-- Photo Banner -->
     <ImageView
         android:id="@+id/ivDetailPhoto"
         android:layout_width="match_parent"
@@ -25,7 +18,7 @@
         tools:visibility="visible"
         tools:background="@color/steam" />
 
-    <!-- Drag handle -->
+    <!-- Drag Handle -->
     <View
         android:layout_width="40dp"
         android:layout_height="4dp"
@@ -34,7 +27,7 @@
         android:layout_marginBottom="4dp"
         android:background="@color/steam" />
 
-    <!-- Close button (top-right) -->
+    <!-- Close Button -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -49,13 +42,13 @@
             android:gravity="center"
             android:text="✕"
             android:textSize="16sp"
-            android:textColor="@color/muted"
+            android:textColor="@color/dark_coffee"
             android:background="@drawable/selector_nav_btn"
             android:padding="4dp" />
 
     </FrameLayout>
 
-    <!-- Type emoji icon — hidden when a photo is loaded -->
+    <!-- Type Icon -->
     <TextView
         android:id="@+id/tvDetailTypeIcon"
         android:layout_width="64dp"
@@ -66,7 +59,7 @@
         android:textSize="36sp"
         android:background="@drawable/circle_avatar" />
 
-    <!-- Place name -->
+    <!-- Place Name -->
     <TextView
         android:id="@+id/tvDetailName"
         android:layout_width="wrap_content"
@@ -75,14 +68,14 @@
         android:layout_marginTop="12dp"
         android:layout_marginHorizontal="24dp"
         android:gravity="center"
-        android:textColor="@color/cream"
-        android:textSize="20sp"
+        android:textColor="@color/espresso"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:fontFamily="serif"
         android:maxLines="2"
         android:ellipsize="end" />
 
-    <!-- Type label + Open/Closed badge side-by-side -->
+    <!-- Type + Open Status -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,15 +88,16 @@
             android:id="@+id/tvDetailType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/accent"
-            android:textSize="13sp" />
+            android:textColor="@color/muted_brown"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvOpenStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             android:visibility="gone" />
 
@@ -115,9 +109,9 @@
         android:layout_height="1dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginVertical="14dp"
-        android:background="@color/steam" />
+        android:background="#D7CCC8" />
 
-    <!-- Address row -->
+    <!-- Address -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -130,7 +124,7 @@
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:text="📍"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvDetailAddress"
@@ -138,13 +132,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:textColor="@color/latte"
-            android:textSize="13sp"
+            android:textColor="@color/dark_coffee"
+            android:textSize="14sp"
             android:maxLines="2"
             android:ellipsize="end" />
     </LinearLayout>
 
-    <!-- Rating row -->
+    <!-- Rating -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -157,7 +151,7 @@
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:text="⭐"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvDetailRating"
@@ -165,11 +159,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:textColor="@color/latte"
-            android:textSize="13sp" />
+            android:textColor="@color/dark_coffee"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Distance row -->
+    <!-- Distance -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -182,7 +177,7 @@
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:text="🚶"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvDetailDistance"
@@ -190,14 +185,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:textColor="@color/latte"
-            android:textSize="13sp"
+            android:textColor="@color/dark_coffee"
+            android:textSize="14sp"
             android:visibility="gone" />
     </LinearLayout>
 
-    <!-- Action row: Directions + Bookmark
-         Gap replaced with layout_marginEnd / layout_marginStart
-         on each button — works on all API levels.               -->
+    <!-- Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -205,16 +198,16 @@
         android:gravity="center"
         android:paddingHorizontal="24dp">
 
-        <!-- Directions button -->
+        <!-- Directions -->
         <LinearLayout
             android:id="@+id/btnDirections"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:layout_marginEnd="6dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:background="@drawable/bg_card"
+            android:background="@drawable/bg_button_light"
             android:padding="8dp">
 
             <TextView
@@ -228,22 +221,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Directions"
-                android:textColor="@color/cream"
-                android:textSize="13sp"
+                android:textColor="@color/espresso"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Bookmark toggle button -->
+        <!-- Bookmark -->
         <LinearLayout
             android:id="@+id/btnBookmark"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:layout_marginStart="6dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:background="@drawable/bg_card"
+            android:background="@drawable/bg_button_light"
             android:padding="8dp">
 
             <TextView
@@ -259,8 +252,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save"
-                android:textColor="@color/cream"
-                android:textSize="13sp"
+                android:textColor="@color/espresso"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

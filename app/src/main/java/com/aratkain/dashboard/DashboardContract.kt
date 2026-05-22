@@ -30,6 +30,12 @@ interface DashboardContract {
 
         /** Show a non-blocking error message overlaid on the map. */
         fun showMapError(message: String)
+
+        /**
+         * Open the device's navigation app (Google Maps, Waze, etc.) with
+         * turn-by-turn directions to the given establishment.
+         */
+        fun navigateToDirections(lat: Double, lng: Double, label: String)
     }
 
     interface Presenter {

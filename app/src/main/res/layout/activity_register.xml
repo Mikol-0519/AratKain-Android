@@ -93,8 +93,11 @@
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etEmail" android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:hint="you@example.com"
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/espresso"
+                        android:hint="you@example.com"
                         android:textColorHint="@color/placeholder"
                         android:inputType="textEmailAddress" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -109,23 +112,36 @@
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etUsername" android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:hint="e.g. foodlover_ph"
-                        android:textColorHint="@color/placeholder" android:inputType="text" />
+                        android:id="@+id/etUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/espresso"
+                        android:hint="e.g. foodlover_ph"
+                        android:textColorHint="@color/placeholder"
+                        android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Full Name -->
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="FULL NAME" android:textSize="10sp" android:textColor="@color/muted"
-                    android:letterSpacing="0.12" android:textAllCaps="true" android:textStyle="bold"
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FULL NAME"
+                    android:textSize="10sp"
+                    android:textColor="@color/muted"
+                    android:letterSpacing="0.12"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
                     android:layout_marginBottom="6dp" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilFullname" style="@style/Widget.AratKain.TextInput"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etFullname" android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:hint="Your full name"
+                        android:id="@+id/etFullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/espresso"
+                        android:hint="Your full name"
                         android:textColorHint="@color/placeholder"
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -141,16 +157,24 @@
                     app:passwordToggleEnabled="true" app:passwordToggleTint="@color/muted"
                     android:layout_marginBottom="20dp">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPassword" android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:hint="Min. 6 characters"
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/espresso"
+                        android:hint="Min. 6 characters"
                         android:textColorHint="@color/placeholder"
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Confirm Password -->
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="CONFIRM PASSWORD" android:textSize="10sp" android:textColor="@color/muted"
-                    android:letterSpacing="0.12" android:textAllCaps="true" android:textStyle="bold"
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONFIRM PASSWORD"
+                    android:textSize="10sp"
+                    android:textColor="@color/muted"
+                    android:letterSpacing="0.12"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
                     android:layout_marginBottom="6dp" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilConfirmPassword" style="@style/Widget.AratKain.TextInput"
@@ -158,8 +182,11 @@
                     app:passwordToggleEnabled="true" app:passwordToggleTint="@color/muted"
                     android:layout_marginBottom="32dp">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etConfirmPassword" android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:hint="Re-enter password"
+                        android:id="@+id/etConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/espresso"
+                        android:hint="Re-enter password"
                         android:textColorHint="@color/placeholder"
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>

@@ -1,6 +1,7 @@
 package com.aratkain.favorites
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -42,7 +43,7 @@ class FavoritesActivity : AppCompatActivity(), FavoritesContract.View {
 
     override fun onResume() {
         super.onResume()
-        presenter.onViewResumed()   // reloads list every time we enter the screen
+        presenter.onViewResumed()
     }
 
     override fun onDestroy() {
@@ -56,6 +57,25 @@ class FavoritesActivity : AppCompatActivity(), FavoritesContract.View {
         favoritesAdapter = NearbyPlaceAdapter(
             bookmarkManager   = BookmarkManager(this),
             onPlaceClick      = { place -> presenter.onPlaceClicked(place) },
+            onDirectionsClick = { place ->
+                val lat = place.latitude ?: return@NearbyPlaceAdapter
+                val lng = place.longitude ?: return@NearbyPlaceAdapter
+                val navUri = Uri.parse("google.navigation:q=$lat,$lng&mode=d")
+                val navIntent = Intent(Intent.ACTION_VIEW, navUri).apply {
+                    setPackage("com.google.android.apps.maps")
+                }
+                if (navIntent.resolveActivity(packageManager) != null) {
+                    startActivity(navIntent)
+                } else {
+                    val geoUri = Uri.parse("geo:$lat,$lng?q=$lat,${lng}(${Uri.encode(place.name ?: "Destination")})")
+                    val geoIntent = Intent(Intent.ACTION_VIEW, geoUri)
+                    if (geoIntent.resolveActivity(packageManager) != null) {
+                        startActivity(geoIntent)
+                    } else {
+                        showError("No navigation app found. Please install Google Maps.")
+                    }
+                }
+            },
             onBookmarkChanged = { place, isSaved -> presenter.onBookmarkChanged(place, isSaved) }
         )
         binding.rvFavorites.apply {

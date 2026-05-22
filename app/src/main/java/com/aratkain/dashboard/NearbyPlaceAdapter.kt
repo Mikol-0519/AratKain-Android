@@ -13,6 +13,8 @@ class NearbyPlaceAdapter(
     private val bookmarkManager: BookmarkManager,
     /** Called when a row is tapped — used to pan the map or open the detail sheet. */
     private val onPlaceClick: (EstablishmentResponse) -> Unit,
+    /** Called when the Directions button is tapped — opens navigation to the place. */
+    private val onDirectionsClick: (EstablishmentResponse) -> Unit,
     /** Optional: called after a bookmark is toggled (e.g. to refresh the Favourites badge). */
     private val onBookmarkChanged: ((place: EstablishmentResponse, isSaved: Boolean) -> Unit)? = null
 ) : RecyclerView.Adapter<NearbyPlaceAdapter.ViewHolder>() {
@@ -90,6 +92,9 @@ class NearbyPlaceAdapter(
 
             // ── Row click → map pan / detail sheet ──────────────
             binding.root.setOnClickListener { onPlaceClick(place) }
+
+            // ── Directions button → open navigation app ──────────
+            binding.btnDirections.setOnClickListener { onDirectionsClick(place) }
         }
 
         private fun refreshBookmarkIcon(isSaved: Boolean) {

@@ -16,7 +16,6 @@ class DashboardPresenter(
     private val app:     AratKainApp
 ) : DashboardContract.Presenter {
 
-    // Coroutine scope tied to the presenter's lifetime
     private val job   = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
 
@@ -24,7 +23,6 @@ class DashboardPresenter(
 
     override fun onViewResumed() {
         view?.showLoading()
-
         val user = session.getCurrentUser()
         if (user == null) {
             view?.hideLoading()
@@ -32,7 +30,6 @@ class DashboardPresenter(
             view?.navigateToLogin()
             return
         }
-
         app.currentUser = user
         view?.hideLoading()
         view?.showUserInfo(user)
@@ -55,12 +52,12 @@ class DashboardPresenter(
     // ── Map & nearby ─────────────────────────────────────────
 
     override fun onLocationReady(lat: Double, lng: Double) {
-        android.util.Log.d("DASHBOARD", "Emulator GPS: lat=$lat lng=$lng")
+        android.util.Log.d("DASHBOARD", "Location dispatched: lat=$lat lng=$lng")
         view?.centerMapOn(lat, lng)
         fetchNearby(lat, lng)
     }
 
-    private fun fetchNearby(lat: Double, lng: Double) {
+    private fun fetchNearby(lat: Double, lng: Double, radiusKm: Double = 10.0) {
         scope.launch {
             view?.showLoading()
             try {
@@ -69,7 +66,7 @@ class DashboardPresenter(
                         NearbyRequest(
                             latitude  = lat,
                             longitude = lng,
-                            radiusKm    = 10.0   // 1 km — change as needed
+                            radiusKm  = radiusKm
                         )
                     )
                 }
@@ -77,7 +74,7 @@ class DashboardPresenter(
                 view?.updateNearbyCount(places.size)
                 view?.addMapMarkers(places)
                 view?.showNearbyPlaces(places)
-                android.util.Log.d("DASHBOARD", "fetchNearby SUCCESS: ${places.size} places returned")
+                android.util.Log.d("DASHBOARD", "fetchNearby: ${places.size} places within ${radiusKm}km")
             } catch (e: Exception) {
                 view?.hideLoading()
                 android.util.Log.e("DASHBOARD", "fetchNearby FAILED: ${e::class.simpleName}: ${e.message}", e)
@@ -89,7 +86,7 @@ class DashboardPresenter(
     // ── Cleanup ───────────────────────────────────────────────
 
     override fun onDestroy() {
-        job.cancel()   // cancels all coroutines launched in this scope
+        job.cancel()
         view = null
     }
 }
