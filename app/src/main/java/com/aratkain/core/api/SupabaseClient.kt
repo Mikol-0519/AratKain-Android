@@ -1,5 +1,6 @@
 package com.aratkain.core.api
 
+import com.aratkain.BuildConfig
 import com.aratkain.core.model.SupabaseAuthResponse
 import com.aratkain.core.model.UserProfile
 import okhttp3.OkHttpClient
@@ -78,7 +79,15 @@ interface SupabaseDbApi {
 object SupabaseClient {
 
     private val logging = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
+        // Request/response BODIES contain passwords and session tokens - they
+        // must never reach logcat in release builds. On debug builds BODY
+        // logging stays available for local development.
+        level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+                else                     HttpLoggingInterceptor.Level.NONE
+
+        // Tokens are not logged even in debug builds.
+        redactHeader("Authorization")
+        redactHeader("apikey")
     }
 
     private val httpClient = OkHttpClient.Builder()
