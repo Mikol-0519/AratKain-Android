@@ -11,11 +11,15 @@ import com.aratkain.core.utils.value
 import com.aratkain.databinding.ActivityForgotpasswordBinding
 import com.aratkain.login.LoginActivity
 
+/**
+ * Single-step forgot password: the user enters an email and we send the
+ * Supabase recovery email. The actual password reset happens on the web app's
+ * reset-password page (the step-2 widgets in the layout XML are unused).
+ */
 class ForgotPasswordActivity : AppCompatActivity(), ForgotPasswordContract.View {
 
-    private lateinit var binding:       ActivityForgotpasswordBinding
-    private lateinit var presenter:     ForgotPasswordContract.Presenter
-    private var          verifiedEmail: String = ""
+    private lateinit var binding:   ActivityForgotpasswordBinding
+    private lateinit var presenter: ForgotPasswordContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,17 +33,9 @@ class ForgotPasswordActivity : AppCompatActivity(), ForgotPasswordContract.View 
 
         presenter = ForgotPasswordPresenter(this)
 
-        // Interaction 1: Find account button (Step 1)
+        // Interaction 1: Send reset email
         binding.btnNext.setOnClickListener {
-            if (binding.layoutStep1.visibility == android.view.View.VISIBLE) {
-                presenter.onFindAccountClicked(binding.etEmail.value())
-            } else {
-                presenter.onResetPasswordClicked(
-                    email           = verifiedEmail,
-                    newPassword     = binding.etNewPassword.value(),
-                    confirmPassword = binding.etConfirmPassword.value()
-                )
-            }
+            presenter.onSendResetEmailClicked(binding.etEmail.value())
         }
 
         // Interaction 2: Back to login
@@ -72,35 +68,14 @@ class ForgotPasswordActivity : AppCompatActivity(), ForgotPasswordContract.View 
         binding.tilEmail.error = message
     }
 
-    override fun showFieldError(field: String, message: String) {
-        when (field) {
-            "newPassword"     -> binding.tilNewPassword.error     = message
-            "confirmPassword" -> binding.tilConfirmPassword.error = message
-        }
-    }
-
     override fun showError(message: String) {
         binding.tvError.text = message
         binding.layoutError.show()
     }
 
     override fun clearErrors() {
-        binding.tilEmail.error            = null
-        binding.tilNewPassword.error      = null
-        binding.tilConfirmPassword.error  = null
+        binding.tilEmail.error = null
         binding.layoutError.hide()
-    }
-
-    override fun goToStep2(email: String) {
-        verifiedEmail = email
-        // Update UI to Step 2
-        binding.layoutStep1.hide()
-        binding.layoutStep2.show()
-        binding.layoutSuccess.hide()
-        binding.tvStepIndicator.text = "Step 2 of 2 — Set new password for $email"
-        binding.btnNext.text = "Update Password"
-        binding.step1Bar.setBackgroundColor(getColor(com.aratkain.R.color.accent))
-        binding.step2Bar.setBackgroundColor(getColor(com.aratkain.R.color.accent))
     }
 
     override fun showSuccess() {

@@ -31,6 +31,16 @@ interface SupabaseAuthApi {
         @Body body: Map<String, String>
     ): Call<SupabaseAuthResponse>
 
+    /**
+     * Requests a password-recovery email. Returns 200 {} whether or not the
+     * email exists (anti-enumeration). The email link opens the web app's
+     * reset-password page; the user completes the reset there.
+     */
+    @POST("auth/v1/recover")
+    fun recoverPassword(
+        @Body body: Map<String, String>
+    ): Call<Void>
+
     @PUT("auth/v1/user")
     fun updatePassword(
         @Header("Authorization") token: String,
@@ -46,13 +56,6 @@ interface SupabaseDbApi {
         @Header("Authorization") token: String,
         @Query("user_id") userId: String,
         @Query("select") select: String = "user_id,username,fullname,email,photo_url,role"
-    ): Call<List<UserProfile>>
-
-    @GET("rest/v1/users")
-    fun getUserByEmail(
-        @Header("Authorization") token: String,
-        @Query("email") email: String,
-        @Query("select") select: String = "email"
     ): Call<List<UserProfile>>
 
     @POST("rest/v1/users")

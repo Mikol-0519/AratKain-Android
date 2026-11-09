@@ -345,43 +345,37 @@ Authorization: Bearer <access_token>
 
 ### 🔓 7. Forgot Password
 
-**Step 1 — Check if email exists:**
+Single step — send the Supabase recovery email. The actual password reset
+happens on the web app's reset-password page, which the link in the email
+opens.
 
-`GET /rest/v1/users?email=eq.{email}&select=email`
+`POST /auth/v1/recover`
 
 **Headers:**
 ```
-Authorization: Bearer <anon_key>
+apikey: <anon_key>
+Content-Type: application/json
 ```
-
-**Response if found `200 OK`:**
-```json
-[
-  { "email": "mikeljosh@test.com" }
-]
-```
-
-**Response if not found `200 OK`:**
-```json
-[]
-```
-
----
-
-**Step 2 — Reset password via RPC:**
-
-`POST /rest/v1/rpc/reset_user_password`
 
 **Request Body:**
 ```json
 {
-  "user_email": "mikeljosh@test.com",
-  "new_password": "newpassword123"
+  "email": "mikeljosh@test.com"
 }
 ```
 
-**Success Response `200 OK`**
-*(empty body)*
+**Success Response `200 OK`:**
+```json
+{}
+```
+
+> The endpoint replies `200 {}` even when the email is not registered
+> (anti-enumeration). The app always shows "Check your email".
+
+> ⚠️ **Removed:** the old `POST /rest/v1/rpc/reset_user_password` RPC was an
+> account-takeover vulnerability — anyone could call it with any email and set
+> a new password without knowing the current one. It must be dropped from the
+> Supabase database (see the workspace `SECURITY.md`).
 
 ---
 
